@@ -1,0 +1,26 @@
+{
+  "name"            : "Twittermap",
+  "description"     : "Maps tweets with sentiment",
+
+  "version"         : "0.0.0",
+  "private"         : true,
+
+  "dependencies": {
+    "union"         : "0.1.7",
+    "flatiron"      : "0.1.11",
+    "socket.io"     : "*",
+    "connect"       : "*",
+    "ntwitter"      : "*",
+    "speakeasy-nlp" : "*"
+  },
+
+  "devDependencies": {
+    "api-easy"     : "0.3.2",
+    "vows"         : "0.6.1"
+  },
+
+  "scripts"        : {
+    "test"         : "vows --spec",
+    "start"        : "node app.js"
+  }
+}
