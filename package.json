@@ -1,6 +1,6 @@
 {
-  "name"            : "Twittermap",
-  "description"     : "Maps tweets with sentiment",
+  "name"            : "Twitter Madlibs",
+  "description"     : "Twitter turned madlib!",
 
   "version"         : "0.0.0",
   "private"         : true,

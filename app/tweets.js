@@ -2,35 +2,29 @@
 // -------------------------------------------------- //
 
 var ntwitter  = require("ntwitter"),
-    sentiment = require("speakeasy-nlp").sentiment,
+    classify  = require("speakeasy-nlp").classify,
     twitter   = new ntwitter({
-        "consumer_key": "6GwherBXMOW9cIywQUThw",
-        "consumer_secret": "LDJHVYJvetYxhy9PCkad7HiqD4FPSrncksILwcAzVQ",
-        "access_token_key" : "30547882-m1Hq3bf2gCiALWSqD24zYc63mHSzjwYo9uQIgz3nF",
-        "access_token_secret" : "l8LI7ib6q2f3jLwMewNtPtm8vHFbVOLYNFQJS2eSU",
-        "callback_url": "http://www.fail.com/"
+        "consumer_key"        : "xyzE3fy1U9GvWtXgKMAuPw",
+        "consumer_secret"     : "NMssoTjYrLYN8GZA7O7QmZCFHTaaQM6WZeIH6ya8U",
+        "access_token_key"    : "48188274-z5pk9codLkY9bPZshhl42cMumybCgHFIqYQ0ZLY2r",
+        "access_token_secret" : "diYQDbInUBzc98ZiIhiJSKjNWIZGZz4mDpIVrfBa6Xo",
+        "callback_url"        : "http://www.fail.com/"
     })
 ;
 
+function madlibify(type) {
+    return "<em class='" + type + "'>__________</em>";
+}
+
 // Stream!
 // 
-// Remember : sample === 1% of all tweets
-//            filter === 1% of a specific filter
-// 
-// filter ex:    
-//  locations  : '-150,0, -60,90'
-//  track      : "superbowl"
 // -------------------------------------------------- //
 
 module.exports = function(app) {
 
     function stream() {
 
-        twitter.stream('statuses/filter', {
-
-            locations  : ['-180,0', '180,90']
-
-        }, function(stream) {
+        twitter.stream('statuses/sample', function(stream) {
 
             // On disconnect, reconnect the stream after 10 seconds
             stream.on("end", function() {
@@ -40,15 +34,33 @@ module.exports = function(app) {
             });
             
             stream.on('data', function (tweet) {
+
+                // Prevent non-english tweets (sorry)
+                if (tweet.user.lang !== "en") return false;
                 
-                tweet.sentiment = sentiment.analyze(tweet.text);
+                // Get the aparts of speech
+                tweet.tags = classify(tweet.text);
+
+                var verbs  = tweet.tags.verbs, 
+                    nouns  = tweet.tags.nouns, 
+                    adjectives = tweet.tags.adjectives;
                 
-                // Okay cool, return an event emitter that says we have
-                // A new Tweet!
-                
-                if (tweet.geo) {
-                    app.volley("tweet", tweet);
-                } 
+                // Do we have any verbs?
+                if (verbs.length > 2) {
+                    tweet.text = tweet.text.replace(verbs[~~(Math.random() * verbs.length)], madlibify("verb"));
+                } else return false;
+
+                // Do we have any nouns?
+                if (nouns.length > 2) {
+                    tweet.text = tweet.text.replace(nouns[~~(Math.random() * nouns.length)], madlibify("noun"));
+                } else return false;
+
+                // Do we have any adjectives?
+                if (adjectives.length > 1) {
+                    tweet.text = tweet.text.replace(adjectives[~~(Math.random() * adjectives.length)], madlibify("adjective"));
+                } else return false;
+
+                app.volley("tweet", tweet);
 
             }); 
 

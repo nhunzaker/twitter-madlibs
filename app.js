@@ -16,7 +16,7 @@ require("./app/routes");
 // Start the server, then install socket.io
 app.start(port, function() {
 
-    app.log.info("Twittermap is listening on port", port);
+    app.log.info("Twitter Madlibs is chatting on port", port);
 
     app.use(telegraph);
 
