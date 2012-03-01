@@ -9,11 +9,10 @@ $(function() {
 
     socket.on("tweet", function (data) {
 
-        console.log(data);
-     
         var lib = $("<li/>").html("<strong>" + i + "</strong>: " + data.text);
 
         $("#madlibs").append(lib).append("<li><hr/></li>");
+        
         i++;
     });
 

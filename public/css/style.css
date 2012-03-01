@@ -4,6 +4,11 @@ li {
 
 em.verb, em.noun, em.adjective {
     position: relative;
+    font-weight: bold;
+    
+    &:focus {
+        outline: none;
+    }
 }
 
 em.verb:after {
