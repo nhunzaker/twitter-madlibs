@@ -35,11 +35,14 @@ module.exports = function(app) {
             
             stream.on('data', function (tweet) {
 
+                var entities = tweet.entities,
+                    lang     = tweet.user.lang;
+
                 // Prevent non-english tweets (sorry)
-                if (tweet.user.lang !== "en") return false;
+                if (lang !== "en") return false;
 
                 // Prevent entity tweets from showing up
-                if (tweet.entities.hashtags.length || tweet.entities.user_mentions.length) return false;
+                if (entities.urls.length || entities.hashtags.length || entities.user_mentions.length) return false;
 
                 // Get the aparts of speech
                 tweet.tags = classify(tweet.text);
@@ -49,19 +52,19 @@ module.exports = function(app) {
                     adjectives = tweet.tags.adjectives;
                 
                 // Do we have any verbs?
-                if (verbs.length > 2) {
+                if (verbs.length) {
                     tweet.text = tweet.text.replace(verbs[~~(Math.random() * verbs.length)], madlibify("verb"));
-                } else return false;
+                } else { return false; }
 
                 // Do we have any nouns?
-                if (nouns.length > 2) {
+                if (nouns.length) {
                     tweet.text = tweet.text.replace(nouns[~~(Math.random() * nouns.length)], madlibify("noun"));
-                } else return false;
+                } else { return false; }
 
                 // Do we have any adjectives?
-                if (adjectives.length > 1) {
+                if (adjectives.length) {
                     tweet.text = tweet.text.replace(adjectives[~~(Math.random() * adjectives.length)], madlibify("adjective"));
-                } else return false;
+                } else { return false; }
 
                 app.volley("tweet", tweet);
 
