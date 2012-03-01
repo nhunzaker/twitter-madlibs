@@ -37,7 +37,10 @@ module.exports = function(app) {
 
                 // Prevent non-english tweets (sorry)
                 if (tweet.user.lang !== "en") return false;
-                
+
+                // Prevent entity tweets from showing up
+                if (tweet.entities.hashtags.length || tweet.entities.user_mentions.length) return false;
+
                 // Get the aparts of speech
                 tweet.tags = classify(tweet.text);
 
