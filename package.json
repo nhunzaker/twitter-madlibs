@@ -1,6 +1,6 @@
 {
   "name"            : "Twitter Madlibs",
-  "description"     : "Twitter turned madlib!",
+  "description"     : "Twitter turned madlibs",
 
   "version"         : "0.0.0",
   "private"         : true,
