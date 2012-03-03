@@ -1,15 +1,15 @@
 {
   "name": "Tweetlibs",
   "description": "Twitter turned madlibs",
-  "version": "0.1.0-1",
+  "version": "0.1.0-4",
   "private": true,
   "dependencies": {
-    "union": "*",
-    "flatiron": "*",
-    "socket.io": "*",
-    "connect": "*",
-    "ntwitter": "*",
-    "speakeasy-nlp": "*"
+    "union": "0.1.7",
+    "flatiron": "0.1.14",
+    "socket.io": "0.9.1",
+    "connect": "2.0.1",
+    "ntwitter": "0.2.10",
+    "speakeasy-nlp": "0.2.2"
   },
   "devDependencies": {
     "api-easy": "0.3.2",
