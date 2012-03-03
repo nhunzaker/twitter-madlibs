@@ -2,14 +2,9 @@
 // -------------------------------------------------- //
 
 var ntwitter  = require("ntwitter"),
+    api_key   = require("../config/twitter_api"),
     classify  = require("speakeasy-nlp").classify,
-    twitter   = new ntwitter({
-        "consumer_key"        : "xyzE3fy1U9GvWtXgKMAuPw",
-        "consumer_secret"     : "NMssoTjYrLYN8GZA7O7QmZCFHTaaQM6WZeIH6ya8U",
-        "access_token_key"    : "48188274-z5pk9codLkY9bPZshhl42cMumybCgHFIqYQ0ZLY2r",
-        "access_token_secret" : "diYQDbInUBzc98ZiIhiJSKjNWIZGZz4mDpIVrfBa6Xo",
-        "callback_url"        : "http://www.fail.com/"
-    })
+    twitter   = new ntwitter(api_key)
 ;
 
 function madlibify(type) {
