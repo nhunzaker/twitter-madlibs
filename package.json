@@ -1,11 +1,11 @@
 {
   "name": "Tweetlibs",
   "description": "Twitter turned madlibs",
-  "version": "0.0.0-6",
+  "version": "0.1.0-1",
   "private": true,
   "dependencies": {
-    "union": "0.1.7",
-    "flatiron": "0.1.11",
+    "union": "*",
+    "flatiron": "*",
     "socket.io": "*",
     "connect": "*",
     "ntwitter": "*",
