@@ -32,25 +32,6 @@ module.exports = {
             app.io.sockets.volatile.emit(name, data);
         };
 
-
-        // Production Settings
-        // -------------------------------------------------- //
-        app.io.configure('production', function() {
-
-            app.io.enable('browser client minification');  // send minified client
-            app.io.enable('browser client etag');          // apply etag caching logic based on version number
-            app.io.enable('browser client gzip');          // gzip the file
-            app.io.set('log level', 1);                    // reduce logging
-            app.io.set('transports', [                     // enable all transports (optional if you want flashsocket)
-                'websocket'
-                , 'flashsocket'
-                , 'htmlfile'
-                , 'xhr-polling'
-                , 'jsonp-polling'
-            ]);
-
-        });
-
     },
 
     init: function (done) {
