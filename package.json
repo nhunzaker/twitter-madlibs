@@ -1,7 +1,7 @@
 {
   "name": "Tweetlibs",
   "description": "Twitter turned madlibs",
-  "version": "0.1.0-9",
+  "version": "0.1.0-10",
   "private": true,
   "dependencies": {
     "union": "0.1.7",
